@@ -1,6 +1,15 @@
 # Catch2
 
-## 关键特性
+- [Catch2](#catch2)
+  - [Catch2介绍](#catch2介绍)
+    - [关键特性](#关键特性)
+    - [其他核心特性](#其他核心特性)
+  - [与gtest对比](#与gtest对比)
+    - [Catch2支持BDD风格，GTest不支持BDD风格](#catch2支持bdd风格gtest不支持bdd风格)
+
+## Catch2介绍
+
+### 关键特性
 
 * 快速且非常容易上手。只需下载catch.hpp，#include就可以了。
 * 没有外部依赖性。只要你能编译C++11，并且有一个C++标准库就可以使用。
@@ -10,7 +19,7 @@
 * 只有一个核心断言宏用于比较。标准的C/C++运算符被用于比较--但完整的表达式被分解，并且lhs和rhs值被记录下来。
 * 测试使用自由形式的字符串来命名--不再使用符合语言规则的标识符
 
-## 其他核心特性
+### 其他核心特性
 
 * 可以对测试进行标记，以便于运行特定的测试组。
 * 失败可以(有选择地)中断到 Windows 和 Mac 上的调试器。
@@ -25,9 +34,11 @@
 
 ## 与gtest对比
 
-## 示例集合
+### Catch2支持BDD风格，GTest不支持BDD风格
 
-## BDD
+<div STYLE="page-break-after: always;"></div>
+
+源代码：
 
 ```c++
 #define CATCH_CONFIG_MAIN
@@ -77,6 +88,8 @@ SCENARIO( "Switch on tests", "[switch_button]" ) {
     }
 }
 ```
+
+执行结果：
 
 ![BDD测试结果](BDD_Given-When-Then_testexample.jpg)
 
