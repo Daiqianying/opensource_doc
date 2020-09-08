@@ -6,7 +6,7 @@
 * (When) some action is carried out
 * (Then) a particular set of observable consequences should obtain
 
-## 理解
+## 解析
 
 ### Given 
 
@@ -22,20 +22,24 @@
 
 ## 为什么用Given-When-Then?
 
-我们用测试电灯的开关功能是否正确来举例.
+我们用测试电灯的开关功能是否正确这一测试需求来进行举例对比.
 
 > 开关是关闭状态时,输入打开,开关应变为打开状态,
 > 开关是关闭状态时,输入关闭,开关应变为关闭状态,
 > 开关是开启状态时,输入打开,开关应变为打开状态,
 > 开关是开启状态时,输入关闭,开关应变为关闭状态.
 
-如果用传统的方法,需要写四个测试用例才可以,可能要这样:
+### GTest测试方法
+
+需要写四个测试用例才可以,可能是这样:
 
 ```c++
 void test_switchOff_On_resultOn()
 {
-    //构造和初始化状态
+    //构造测试对象和相关资源
     Switch s;
+
+    //设置状态
     s.setState(Off);
 
     //执行需要测试的逻辑
@@ -43,15 +47,30 @@ void test_switchOff_On_resultOn()
 
     //测试结果
     REQUIRE(s.State() == On);
+
+    //清理测试对象相关资源
+    s.clear();
 }
-void test_switchOff_Off_resultOff();
-void test_switchOn_On_resultOn();
-void test_switchOn_Off_resultOff();
+void test_switchOff_Off_resultOff()
+{
+    /*You know it.*/
+}
+void test_switchOn_On_resultOn()
+{
+    /*You know it.*/
+}
+void test_switchOn_Off_resultOff()
+{
+    /*You know it.*/
+}
 ```
 
-问题：函数名称一般要写的比较长，才能说清楚想要测试什么。测试用例中初始化相关的代码多次出现很冗余
+问题:
 
-如果采用Given-When-Then的模式来完成同样的测试需求，可能是这样子
+- 函数名称要写的比较长，才能说清楚想要测试什么.
+- 测试用例中初始化相关的代码多次出现很冗余
+
+### BDD风格测试用例
 
 ```c++
 SCENARIO("Switch on tests", "[switch_button]")
@@ -97,14 +116,19 @@ SCENARIO("Switch on tests", "[switch_button]")
             }
         }
     }
+    s.clear();
 }
 ```
 
-优点：构造和设定状态的代码可以重用，不用写两次。（注意：是独立执行的）
+优点:
 
-C++的测试库中，Catch2支持BDD Stele方式！
+- 逻辑表述清晰
+- 极大减少冗余代码
+
+**C++的测试库中，Catch2支持BDD Stele方式！**
 
 ## 参考链接
 
 1. https://www.agilealliance.org/glossary/gwt/#q=~(infinite~false~filters~(postType~(~'page~'post~'aa_book~'aa_event_session~'aa_experience_report~'aa_glossary~'aa_research_paper~'aa_video)~tags~(~'given*20when*20then))~searchTerm~'~sort~false~sortDirection~'asc~page~1)
 2. http://www.electronvector.com/blog/using-catch-to-write-bdd-style-unit-tests-for-c
+
