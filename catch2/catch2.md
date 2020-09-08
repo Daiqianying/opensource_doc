@@ -4,8 +4,6 @@
   - [Catch2介绍](#catch2介绍)
     - [关键特性](#关键特性)
     - [其他核心特性](#其他核心特性)
-  - [与gtest对比](#与gtest对比)
-    - [Catch2支持BDD风格，GTest不支持BDD风格](#catch2支持bdd风格gtest不支持bdd风格)
 
 ## Catch2介绍
 
@@ -31,65 +29,4 @@
 * 替代断言宏报告失败，但不中止测试用例
 * 浮点容差比较是使用表达式 Approx ()语法构建的。
 * 内部和友好的宏是孤立的，所以名称冲突可以管理
-
-## 与gtest对比
-
-### Catch2支持BDD风格，GTest不支持BDD风格
-
-<div STYLE="page-break-after: always;"></div>
-
-源代码：
-
-```c++
-#define CATCH_CONFIG_MAIN
-#include "../../../single_include/catch2/catch.hpp"
-
-enum class State {
-    kOff,
-    kOn,
-};
-
-class Switcher {
-public:
-    Switcher() {}
-    ~Switcher() {}
-
-    void initState( State s ) { _s = s; }
-    State getState() const { return _s; }
-    void Process( State s ) { _s = s; }
-
-private:
-    State _s = State::kOff;
-};
-
-SCENARIO( "Switch on tests", "[switch_button]" ) {
-    Switcher s;
-    GIVEN( "the switch is on" ) {
-        s.initState( State::kOn );
-        WHEN( "process on" ) {
-            s.Process( State::kOn );
-            THEN( "switch is on" ) { REQUIRE( s.getState() == State::kOn ); }
-        }
-        WHEN( "process off" ) {
-            s.Process( State::kOff );
-            THEN( "switch is off" ) { REQUIRE( s.getState() == State::kOff ); }
-        }
-    }
-    GIVEN( "the switch is off" ) {
-        s.initState( State::kOff );
-        WHEN( "process on" ) {
-            s.Process( State::kOn );
-            THEN( "switch is on" ) { REQUIRE( s.getState() == State::kOn ); }
-        }
-        WHEN( "process off" ) {
-            s.Process( State::kOff );
-            THEN( "switch is off" ) { REQUIRE( s.getState() == State::kOn ); }
-        }
-    }
-}
-```
-
-执行结果：
-
-![BDD测试结果](BDD_Given-When-Then_testexample.jpg)
 
