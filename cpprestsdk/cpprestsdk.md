@@ -255,7 +255,6 @@ class pplx_dflt_scheduler : public pplx::scheduler_interface
 
 ---
 
-谢谢大家🙂
-
+扫码关注我，谢谢大家🙂
 ![width:530px](mywechat.jpg)
 
