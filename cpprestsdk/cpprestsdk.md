@@ -37,6 +37,7 @@ REST SDK是微软的一个项目，用于在本地代码中使用现代异步C++
 
 pplx是PPL(Parallel Patterns Library，微软为C++提供的任务并行、并行算法和容器)的删减版.PPLX只提供任务并行的功能，没有提供并行算法和并行容器和对象。
 
+直接使用cpprest内部的pplx会带上cpprestsdk的其他部分，有个同学做了提取工作：https://github.com/mghazaryan/pplx
 
 ---
 
